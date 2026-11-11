@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tenses Trainer · A2+</title>
+<style>
+:root{--bg:#faf7f0;--card:#fff;--ink:#1f2a44;--mut:#5b6478;--line:#d8d1c0;--ok:#2e7d32;--okb:#e8f3e8;--bad:#b3261e;--badb:#fbeaea;--acc:#1f2a44;--accT:#fff;--mk:#9a5b13;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171a22;--card:#1f2430;--ink:#e8e6df;--mut:#a3a9b8;--line:#394055;--ok:#7fd085;--okb:#1e2f22;--bad:#ff8a80;--badb:#35201f;--acc:#e8e6df;--accT:#171a22;--mk:#e0b060;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171a22;--card:#1f2430;--ink:#e8e6df;--mut:#a3a9b8;--line:#394055;--ok:#7fd085;--okb:#1e2f22;--bad:#ff8a80;--badb:#35201f;--acc:#e8e6df;--accT:#171a22;--mk:#e0b060;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.9rem;text-align:center;margin:.4em 0 .1em;letter-spacing:.02em}
+.sub{text-align:center;color:var(--mut);font-style:italic;margin:0 0 1.2em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 18px;margin:14px 0}
+.row{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;margin:8px 0}
+select{font:inherit;padding:3px 6px;background:var(--card);color:var(--ink);border:1px solid var(--line)}
+button{font:inherit;background:var(--acc);color:var(--accT);border:0;padding:9px 22px;border-radius:3px;cursor:pointer;letter-spacing:.03em}
+button.sec{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.q{border-left:4px solid var(--line)}
+.q.ok{border-left-color:var(--ok)}.q.bad{border-left-color:var(--bad)}
+.q p{margin:0 0 8px}.gap{display:inline-block;min-width:3.6em;text-align:center;border-bottom:2px solid var(--ink);font-size:.8em;color:var(--mut)}.mk{text-decoration:none}.hl .mk{font-style:italic;font-weight:bold;color:var(--mk);border-bottom:1px dotted var(--mk)}.hint{display:none;font-size:.85rem;color:var(--mut);margin-top:6px}.sh .hint{display:block}table{border-collapse:collapse;font-size:.88rem;min-width:560px}td,th{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}.wrap{overflow-x:auto;margin-top:8px}details summary{cursor:pointer}.gl{font-size:.85rem;color:var(--mut);font-style:italic;margin:8px 0 3px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+@media(max-width:520px){.opts{grid-template-columns:1fr}}
+.opts label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);padding:6px 10px;border-radius:3px;cursor:pointer}
+.opts label span{font-weight:bold;color:var(--mut)}
+.opts label.c{background:var(--okb);border-color:var(--ok)}
+.opts label.w{background:var(--badb);border-color:var(--bad)}
+.fb{margin-top:10px;font-size:.95rem}.fb .m{font-weight:bold}
+.score{text-align:center;font-size:1.3rem}
+.hide{display:none}
+</style></head><body><main>
+<h1>Tenses Trainer</h1>
+<p class="sub">Present Simple · Present Continuous · Past Simple · Past Continuous — statements, negatives, questions — level A2+</p>
+<div class="card" id="setup">
+<div class="row"><b>Tenses:</b>
+<label><input type="checkbox" class="tn" value="ps" checked> Present Simple</label>
+<label><input type="checkbox" class="tn" value="pc" checked> Present Continuous</label>
+<label><input type="checkbox" class="tn" value="pas" checked> Past Simple</label>
+<label><input type="checkbox" class="tn" value="pac" checked> Past Continuous</label></div>
+<div class="row"><b>Types:</b>
+<label><input type="checkbox" class="yn" value="a" checked> Statements</label>
+<label><input type="checkbox" class="yn" value="n" checked> Negatives</label>
+<label><input type="checkbox" class="yn" value="q" checked> General questions</label>
+<label><input type="checkbox" class="yn" value="w" checked> Special questions</label>
+<label><input type="checkbox" class="yn" value="m" checked> While / when / contrast (2 gaps)</label></div>
+<div class="row"><label><input type="checkbox" id="hl" onchange="document.body.classList.toggle('hl',this.checked)"> Highlight time helpers</label>
+<label><input type="checkbox" id="vo"> Target vocabulary only</label></div>
+<div class="row"><label><input type="checkbox" id="hints" onchange="document.body.classList.toggle('sh',this.checked)"> Show hints (use + pattern) under each sentence</label></div>
+<div class="row"><label><b>Sentences:</b> <select id="cnt"><option>10</option><option selected>15</option><option>20</option><option>30</option></select></label>
+<button onclick="start()">Start a new test</button></div>
+<p style="margin:6px 0 0;color:var(--mut);font-size:.9rem">Every test is generated at random, so you can practise as long as you like.</p>
+</div>
+<details class="card"><summary><b>Cheat sheet: time helpers &amp; patterns</b></summary><div class="wrap"><table>
+<tr><th>Tense</th><th>Use</th><th>Time helpers</th><th>Patterns</th></tr>
+<tr><td>Present Simple</td><td>habits, routines, facts</td><td>every day, usually, often, always, sometimes, rarely, never, on Sundays, twice a week</td><td>I play / he plays<br>I don’t play / he doesn’t play<br>Do you play? Does he play?</td></tr>
+<tr><td>Present Continuous</td><td>happening now</td><td>now, at the moment, right now, Look!, but now</td><td>I am playing<br>I’m not playing / he isn’t playing<br>Are you playing?</td></tr>
+<tr><td>Past Simple</td><td>finished action</td><td>yesterday, last night, two days ago, in 2019, a week ago</td><td>I played / I went<br>I didn’t play<br>Did you play?</td></tr>
+<tr><td>Past Continuous</td><td>action in progress at a moment in the past</td><td>at 8 o’clock yesterday, last night</td><td>I was playing / we were playing<br>I wasn’t playing<br>Were you playing?</td></tr>
+<tr><td colspan="2"><b>while</b> = two actions at the same time</td><td colspan="2">in the past: <i>While I was cooking, he was watching TV.</i><br>now: <i>At the moment, while I’m cooking, he’s watching TV.</i></td></tr>
+<tr><td colspan="2"><b>when</b> = a short action interrupts a longer one</td><td colspan="2"><i>I was cooking when the phone rang.</i> (Past Continuous + Past Simple)</td></tr>
+</table></div></details>
+<div id="test" class="hide"><div id="qs"></div>
+<div class="row" style="justify-content:center"><button id="sub" onclick="check()">Submit answers</button>
+<button class="sec hide" id="again" onclick="start()">New test</button></div>
+<div class="card score hide" id="res"></div></div>
+<script>
+const R=a=>a[Math.floor(Math.random()*a.length)];
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const SUBJ=[["I","I","I",1],["You","you","y"],["He","he","3"],["She","she","3"],["We","we","y"],["They","they","y"],["Tom","he","3",1],["Anna","she","3",1],["My brother","he","3"],["My sister","she","3"],["My parents","they","y"],["The students","they","y"],["Our teacher","she","3"],["My friends","they","y"]];
+const V=[["play","plays","playing","played","football in the park"],["watch","watches","watching","watched","a film"],["cook","cooks","cooking","cooked","dinner"],["write","writes","writing","wrote","an email"],["drink","drinks","drinking","drank","coffee in the café"],["listen","listens","listening","listened","to music"],["study","studies","studying","studied","for the exam"],["walk","walks","walking","walked","in the park"],["eat","eats","eating","ate","lunch"],["clean","cleans","cleaning","cleaned","the kitchen"],["buy","buys","buying","bought","fruit at the market"],["swim","swims","swimming","swam","in the lake"],["paint","paints","painting","painted","a picture"],["wait","waits","waiting","waited","for the bus"],["talk","talks","talking","talked","to a friend on the phone"],["drive","drives","driving","drove","to work"],["take","takes","taking","took","photos of the sea"],["sing","sings","singing","sang","in the choir"],["learn","learns","learning","learned","new words"],["make","makes","making","made","sandwiches"],["wash","washes","washing","washed","the car"],["ride","rides","riding","rode","a bike along the river"]];
+const VT=[["refuse","refuses","refusing","refused","to pay for an extra bag"],["hope","hopes","hoping","hoped","to see the sea from the room"],["allow","allows","allowing","allowed","pets in the room"],["search for","searches for","searching for","searched for","a cheap hotel"],["go sightseeing","goes sightseeing","going sightseeing","went sightseeing","in the old town"],["leave","leaves","leaving","left","a tip for the waiter"],["turn on","turns on","turning on","turned on","the AC"],["hike","hikes","hiking","hiked","a challenging trail"],["go","goes","going","went","to the check-in desk"],["take","takes","taking","took","a guided tour"],["achieve","achieves","achieving","achieved","a big goal"],["move","moves","moving","moved","abroad"],["check","checks","checking","checked","the weather forecast"],["wear","wears","wearing","wore","slippers in the hotel"],["drop","drops","dropping","dropped","the passengers off here"],["admire","admires","admiring","admired","the views from the top"],["go","goes","going","went","to a fascinating exhibition"],["pick up","picks up","picking up","picked up","takeout food"],["have","has","having","had","no pillow in the room","X"],["take","takes","taking","took","snaps of a wonderful landscape"],["climb up","climbs up","climbing up","climbed up","the mountain"],["feel like","feels like","feeling like","felt like","going out","S"],["see","sees","seeing","saw","iconic places"],["put","puts","putting","put","the bags in the trunk","","3"],["have","has","having","had","a stopover in Dubai"],["create","creates","creating","created","a route for the trip"],["create","creates","creating","created","an itinerary for the weekend"],["ask for","asks for","asking for","asked for","a hanger"],["check in","checks in","checking in","checked in","earlier than usual"],["eat out","eats out","eating out","ate out","in a small restaurant"]];
+let VO=false;
+const pv=ok=>{for(let i=0;i<80;i++){const v=VO||Math.random()<.35?R(VT):R(V);if(!ok||ok(v))return v}return R(V)};
+const sj=v=>v[6]=="3"?R(SUBJ.filter(s=>s[2]=="3")):R(SUBJ);
+const EV=[["the plane","take off","takes off","taking off","took off"],["boarding","start","starts","starting","started"],["the phone","ring","rings","ringing","rang"],["the doorbell","ring","rings","ringing","rang"],["the teacher","come in","comes in","coming in","came in"],["the alarm","go off","goes off","going off","went off"],["the baby","wake up","wakes up","waking up","woke up"],["the dog","bark","barks","barking","barked"],["the bus","arrive","arrives","arriving","arrived"]];
+const ADV=["usually","rarely","often","always","sometimes"];
+const TPS=["every day","every morning","on Sundays","twice a week","every weekend","once a month","in the evening"];
+const TPAS=["yesterday","last night","last week","two days ago","a week ago","last summer","in 2019","last Monday"];
+const MK={ps:()=>R(TPS),pc:()=>R(["at the moment","right now","now"]),pas:()=>R(TPAS),pac:()=>`at ${R([6,7,8,9])} o’clock ${R(["yesterday morning","yesterday evening","last night"])}`};
+const S=(s,f)=>f||s[3]?s[0]:s[0].toLowerCase();
+const beP=s=>s[2]=="I"?"am":s[2]=="3"?"is":"are",beW=s=>s[2]=="y"?"were":"was";
+const cap=f=>Object.fromEntries(Object.entries(f).map(([k,x])=>[k,x[0].toUpperCase()+x.slice(1)]));
+function FF(s,v,pol){const t=s[2],p=t=="3"?v[1]:v[0];
+if(pol=="a")return{ps:p,pc:beP(s)+" "+v[2],pas:v[3],pac:beW(s)+" "+v[2]};
+if(pol=="n")return{ps:(t=="3"?"doesn’t ":"don’t ")+v[0],pc:{I:"am not",3:"isn’t",y:"aren’t"}[t]+" "+v[2],pas:"didn’t "+v[0],pac:(t=="y"?"weren’t ":"wasn’t ")+v[2]};
+const b=S(s,0);return{ps:(t=="3"?"does ":"do ")+b+" "+v[0],pc:beP(s)+" "+b+" "+v[2],pas:"did "+b+" "+v[0],pac:beW(s)+" "+b+" "+v[2]}}
+const FE=e=>({ps:e[2],pc:"is "+e[3],pas:e[4],pac:"was "+e[3]});
+const NAME={ps:"Present Simple",pc:"Present Continuous",pas:"Past Simple",pac:"Past Continuous"};
+const USE={ps:"habit or routine",pc:"action happening now",pas:"finished action in the past",pac:"action in progress at a moment in the past"};
+const PL={a:"",n:" (negative)",q:" (general question)",w:" (special question)"};
+const FORM={ps:{a:"V1 (+ -s/-es with he/she/it)",n:"don’t / doesn’t + V1 (no -s after doesn’t)",q:"Do / Does + subject + V1",w:"question word + do / does + subject + V1"},pc:{a:"am / is / are + V-ing",n:"am not / isn’t / aren’t + V-ing",q:"Am / Is / Are + subject + V-ing",w:"question word + am / is / are + subject + V-ing"},pas:{a:"V2 (past form)",n:"didn’t + V1 (not V2!)",q:"Did + subject + V1",w:"question word + did + subject + V1"},pac:{a:"was / were + V-ing",n:"wasn’t / weren’t + V-ing",q:"Was / Were + subject + V-ing",w:"question word + was / were + subject + V-ing"}};
+const X=(k,p,m)=>`<b>${NAME[k]}${PL[p]}</b> – ${USE[k]}${m?"; “"+m+"” signals it":""}. Form: ${FORM[k][p]}.`;
+const M=x=>`<u class="mk">${x}</u>`,c1=x=>x[0].toUpperCase()+x.slice(1);
+const G=(f,k,h,x,p="a")=>({o:sh(["ps","pc","pas","pac"]).map(t=>[f[t],t]),k,ans:f[k],h,x,c:USE[k]+" → "+FORM[k][p]});
+const Q=(t,gs)=>({t,gs});
+function build(k,pol){const cn=k=="pc"||k=="pac",v=pv(x=>!(x[5]&&cn)&&!(x[5]=="X"&&pol!="a")),s=sj(v);let m=MK[k]();const pre=k=="pac"?M(c1(m))+", ":"",suf=k=="pac"?"":" "+M(m);
+let f=FF(s,v,pol=="w"?"q":pol),h=pol=="a"?v[0]:pol=="n"?"not / "+v[0]:S(s,0)+" / "+v[0],t,xx=null;
+if(pol=="a"||pol=="n"){t=`${pre}${S(s,!pre)} ___ ${v[4]}${suf}.`;
+if(pol=="a"&&k=="ps"){const r=Math.random();if(r<.3){t=`It’s ${R(["a hobby","a habit","a tradition","a rule"])}: ${S(s,0)} ___ ${v[4]}.`;xx="<b>Present Simple</b> – a hobby, habit or rule: a repeated action, not something happening right now. Form: V1 (+ -s/-es with he/she/it)."}else if(r<.65){m=R(ADV);t=`${S(s,1)} ${M(m)} ___ ${v[4]}.`}}
+if(k=="pc"){const r=Math.random();if(r<.15){m="Look!";t=`${M("Look!")} ${S(s,1)} ___ ${v[4]}.`}else if(r<.55){m=R(["Shh!","Be quiet!","Hurry up!"]);t=`${m} ${S(s,1)} ___ ${v[4]}.`}}
+if(pol=="a"&&k=="pas"&&Math.random()<.45){t=`${S(s,1)} ___ ${v[4]} and then ${R(["went home","took a nap","had a rest","caught a taxi"])}.`;xx="<b>Past Simple</b> – a sequence of finished past actions: the next verb (“went”, “took”…) is in Past Simple too. Form: V2."}}
+else if(pol=="q"){if(!pre)f=cap(f);t=`${pre}___ ${v[4]}${suf}?`}
+else if(k=="ps"){m="How often";t=`${M("How often")} ___ ${v[4]}?`}
+else t=`${pre}${pre?"why":"Why"} ___ ${v[4]}${suf}?`;
+return Q(t,[G(f,k,h,xx||X(k,pol,m),pol)])}
+function what(k){const s=R(SUBJ),m=MK[k]();const f=FF(s,["do","does","doing","did"],"q");return Q(`What ___ ${M(m)}?`,[G(f,k,S(s,0)+" / do",X(k,"w",m),"w")])}
+function pair(okv,okw){const v=pv(okv);let w=pv(okw);while(w==v)w=pv(okw);const s1=sj(v);let s2=sj(w);while(s2==s1)s2=sj(w);return[s1,s2,v,w]}
+const NC=x=>!x[5];
+function contrast(){const v=pv(),w=pv(NC),s=(v[6]||w[6])?R(SUBJ.filter(s=>s[2]=="3")):R(SUBJ),p=s[2]=="I"?"I":s[1];
+if(Math.random()<.5)return Q(`${S(s,1)} ${M("usually")} ___ ${v[4]}, ${M("but now")} ${p} ___ ${w[4]}.`,[G(FF(s,v,"a"),"ps",v[0],X("ps","a","usually")),G(FF(s,w,"a"),"pc",w[0],"<b>Present Continuous</b> – “but now” contrasts with the habit and shows what is happening at this moment. Form: am / is / are + V-ing.")]);
+return Q(`${S(s,1)} ___ ${v[4]} ${M("every day")}, ${M("but at the moment")} ${p} ___ ${w[4]}.`,[G(FF(s,v,"a"),"ps",v[0],X("ps","a","every day")),G(FF(s,w,"a"),"pc",w[0],"<b>Present Continuous</b> – “at the moment” contrasts with the habit and shows what is happening now. Form: am / is / are + V-ing.")])}
+function whileQ(){const[s1,s2,v,w]=pair(NC,NC),m=R(["yesterday evening","last night","yesterday morning"]),x="<b>Past Continuous</b> – “while” introduces an action in progress in the past; two actions happening at the same time are both Past Continuous. Form: was / were + V-ing.",r=Math.random(),A=S(s1,0),B=S(s2,0);
+const t=r<.25?`${M(c1(m))}, ${M("while")} ${A} ___ ${v[4]}, ${B} ___ ${w[4]}.`:r<.5?`${M("While")} ${A} ___ ${v[4]}, ${B} ___ ${w[4]} ${M(m)}.`:r<.75?`${S(s1,1)} ___ ${v[4]} ${M("while")} ${B} ___ ${w[4]} ${M(m)}.`:`${M(c1(MK.pac()))}, ${A} ___ ${v[4]} ${M("while")} ${B} ___ ${w[4]}.`;
+return Q(t,[G(FF(s1,v,"a"),"pac",v[0],x),G(FF(s2,w,"a"),"pac",w[0],x)])}
+function whileP(){const[s1,s2,v,w]=pair(NC,NC),m=R(["at the moment","right now","now"]),x="<b>Present Continuous</b> – “while” + “now / at the moment”: two actions happening at the same time right now are both Present Continuous. Form: am / is / are + V-ing.",r=Math.random(),A=S(s1,0),B=S(s2,0);
+const t=r<.34?`${M(c1(m))}, ${M("while")} ${A} ___ ${v[4]}, ${B} ___ ${w[4]}.`:r<.67?`${S(s1,1)} ___ ${v[4]} ${M("while")} ${B} ___ ${w[4]} ${M(m)}.`:`${M("Look!")} ${S(s1,1)} ___ ${v[4]} ${M("while")} ${B} ___ ${w[4]}.`;
+return Q(t,[G(FF(s1,v,"a"),"pc",v[0],x),G(FF(s2,w,"a"),"pc",w[0],x)])}
+function whenQ(){const v=pv(NC),s=sj(v),e=R(EV),m=Math.random()<.4?R(["yesterday","last night","yesterday evening"]):"",xc="<b>Past Continuous</b> – the longer action that was in progress when a short action interrupted it. Form: was / were + V-ing.",xs="<b>Past Simple</b> – the short, sudden action that interrupted the longer one (“when” + Past Simple). Form: V2.";
+const a=G(FF(s,v,"a"),"pac",v[0],xc),b=G(FE(e),"pas",e[1],xs),pm=m?M(c1(m))+", ":"";
+return Math.random()<.5?Q(`${pm}${S(s,!m)} ___ ${v[4]} ${M("when")} ${e[0]} ___.`,[a,b]):Q(`${m?pm+M("when"):M("When")} ${e[0]} ___, ${S(s,0)} ___ ${v[4]}.`,[b,a])}
+const CASES=[];
+["ps","pc","pas","pac"].forEach(k=>{["a","n","q","w"].forEach(p=>CASES.push({t:[k],y:p,f:()=>build(k,p)}));CASES.push({t:[k],y:"w",f:()=>what(k)})});
+CASES.push({t:["ps","pc"],y:"m",f:contrast},{t:["pac"],y:"m",f:whileQ},{t:["pac"],y:"m",f:whileQ},{t:["pc"],y:"m",f:whileP},{t:["pc"],y:"m",f:whileP},{t:["pac","pas"],y:"m",f:whenQ},{t:["pac","pas"],y:"m",f:whenQ});
+let cur=[];
+function start(){
+VO=!!document.getElementById("vo").checked;const val=c=>{const a=[...document.querySelectorAll("."+c+":checked")].map(x=>x.value);return a};
+let ts=val("tn"),ys=val("yn");if(!ts.length)ts=["ps","pc","pas","pac"];if(!ys.length)ys=["a","n","q","w","m"];
+let pool=CASES.filter(c=>c.t.every(x=>ts.includes(x))&&ys.includes(c.y));if(!pool.length)pool=CASES.filter(c=>c.t.every(x=>ts.includes(x)));
+const n=+document.getElementById("cnt").value,seen=new Set();cur=[];let g=0;
+while(cur.length<n&&g++<3000){const q=R(pool).f(),key=q.t+q.gs.map(x=>x.h).join("|");if(seen.has(key))continue;seen.add(key);cur.push(q)}
+document.getElementById("qs").innerHTML=cur.map((q,i)=>{let n=0;const txt=q.t.replace(/___/g,()=>{const g=q.gs[n++];return `<span class="gap">${q.gs.length>1?"("+n+")":""}</span> (${g.h})`});
+return `<div class="card q" id="q${i}"><p><b>${i+1}.</b> ${txt}</p>${q.gs.map((g,j)=>`<div>${q.gs.length>1?`<div class="gl">Gap ${j+1}</div>`:""}<div class="opts">${g.o.map((o,l)=>`<label><input type="radio" name="q${i}_${j}" value="${l}"><span>${"ABCD"[l]}</span> ${o[0]}</label>`).join("")}</div><div class="hint">${q.gs.length>1?"Gap "+(j+1)+": ":"Hint: "}${g.c}</div></div>`).join("")}<div class="fb"></div></div>`}).join("");
+document.getElementById("test").classList.remove("hide");document.getElementById("sub").classList.remove("hide");
+document.getElementById("again").classList.add("hide");document.getElementById("res").classList.add("hide");
+document.getElementById("qs").scrollIntoView({behavior:"smooth"});}
+function check(){let sc=0,tot=0;
+cur.forEach((q,i)=>{const box=document.getElementById("q"+i);let all=true;const lines=[];
+q.gs.forEach((g,j)=>{tot++;const ins=[...box.querySelectorAll(`input[name=q${i}_${j}]`)],pick=ins.findIndex(x=>x.checked),ok=pick>=0&&g.o[pick][1]==g.k;if(ok)sc++;else all=false;
+ins.forEach((inp,l)=>{inp.disabled=true;if(g.o[l][1]==g.k)inp.parentElement.classList.add("c");else if(l==pick)inp.parentElement.classList.add("w")});
+lines.push(`<div style="margin-top:6px">${q.gs.length>1?`<b>(${j+1})</b> `:""}<span style="color:var(${ok?"--ok":"--bad"})">${ok?"✓":"✗"} <b>${g.ans}</b></span>${ok?"":pick>=0?" — you chose “"+g.o[pick][0]+"”":" — no answer"}<br>${g.x}</div>`)});
+box.classList.add(all?"ok":"bad");let n=0;
+box.querySelector(".fb").innerHTML=`<div><i>${q.t.replace(/___/g,()=>`<b>${q.gs[n++].ans}</b>`)}</i></div>`+lines.join("")});
+const r=document.getElementById("res"),pc=sc/tot;
+r.innerHTML=`Your score: <b>${sc} / ${tot}</b> (${Math.round(100*pc)}%)<br><small>${pc>=.9?"Excellent work!":pc>=.7?"Good job! Check the explanations below.":"Keep practising — read the explanations and try a new test."}</small>`;
+r.classList.remove("hide");document.getElementById("sub").classList.add("hide");document.getElementById("again").classList.remove("hide");r.scrollIntoView({behavior:"smooth"});}
+</script></main></body></html>
